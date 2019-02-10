@@ -1,0 +1,203 @@
+
+<LienzoApp>:
+    orientation: "vertical"
+    canvas:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<InicioLienzo>:
+    orientation: "vertical"
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "background.jpg"
+    BoxLayout
+        size_hint_y: 0.3
+
+    Button:
+
+        size_hint: .8, .05
+        pos_hint: {"x": .1, "y": .1}
+        text: "Mi capacidad de pago"
+
+    Button:
+
+        size_hint: .8, .05
+        pos_hint: {"x": .1, "y": .1}
+        text: "Calculadora de cuotas"
+
+    Button:
+
+        size_hint: .8, .05
+        pos_hint: {"x": .1, "y": .1}
+        text: "Catalogo de productos"
+        on_press: root.crear_db()
+
+    Button:
+
+        size_hint: .8, .05
+        pos_hint: {"x": .1, "y": .1}
+        text: "Salir"
+        on_press: root.Salir_de_App()
+
+    BoxLayout
+        size_hint_y: .05
+
+<CajasDatos>:
+    data: ""
+    data_id: ""
+    canvas:
+        Color:
+            rgb: 0.2,0.2,0.2
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    Label:
+        size_hint_x: 0.9
+        text: root.data
+    Button:
+        size_hint_x: 0.18
+        text: "Editar"
+        on_press: root.actualizar(root.data_id)
+
+
+<DBWid>:
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "background.jpg"
+    ScrollView:
+        size: self.size
+        GridLayout:
+            id: container
+            padding: [10,10,10,10]
+            spacing: 5
+            size_hint_y: None
+            cols: 1
+            row_default_height: root.height*0.2
+            height: self.minimum_height
+
+<NewDataButton>:
+    orientation: "vertical"
+    Button:
+        text: "Volver"
+        on_press: root.volver_a_inicio()
+    Button:
+        text: "Agregar"
+        on_press: root.crear_solucion()
+
+<EtiquetaIzquierda@Label>:
+    text_size: self.size
+    halign: "left"
+
+<MensajePopUp>:
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            id: mensaje
+            size_hint: 1,0.8
+            text:""
+        Button:
+            size_hint: 1,0.2
+            text: "volver"
+            on_press: root.dismiss()
+
+<InsertarDataWid>:
+    orientation: "vertical"
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "background.jpg"
+
+    EtiquetaIzquierda: #------------------ Nombre
+        text: "Nombre"
+    TextInput:
+        id: ti_Nombre
+        multiline: False
+        hint_text: "Nombre"
+
+    EtiquetaIzquierda: #------------------ Moneda
+        text: "Moneda"
+    TextInput:
+        id: ti_Moneda
+        multiline: False
+        hint_text: "Moneda"
+
+    EtiquetaIzquierda: #------------------ Tasa
+        text: "Tasa"
+    TextInput:
+        id: ti_Tasa
+        multiline: False
+        hint_text: "Tasa"
+
+    EtiquetaIzquierda: #------------------ Plazo
+        text: "Plazo"
+    TextInput:
+        id: ti_Plazo
+        multiline: False
+        hint_text: "Plazo"
+
+    BoxLayout:
+        size_hint_y: 5
+
+    BoxLayout:
+        Button:
+            text: "Crear"
+            on_press: root.insertar_data()
+        Button
+            text: "Volver"
+            on_press: root.volver()
+
+<ActualizaCajas>:
+    orientation: "vertical"
+    data_id: ""
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "background.jpg"
+
+    EtiquetaIzquierda: #------------------ Nombre
+        text: "Nombre: " + root.data_id
+
+    EtiquetaIzquierda: #------------------ Moneda
+        text: "Moneda"
+    TextInput:
+        id: ti_Moneda
+        multiline: False
+        hint_text: "Moneda"
+
+    EtiquetaIzquierda: #------------------ Tasa
+        text: "Tasa"
+    TextInput:
+        id: ti_Tasa
+        multiline: False
+        hint_text: "Tasa"
+
+    EtiquetaIzquierda: #------------------ Plazo
+        text: "Plazo"
+    TextInput:
+        id: ti_Plazo
+        multiline: False
+        hint_text: "Plazo"
+
+    BoxLayout:
+        size_hint_y: 4
+
+    BoxLayout:
+        Button:
+            text: "Actualizar"
+            on_press: root.actualizar_data()
+        Button
+            text: "Eliminar"
+            on_press: root.eliminar()
+
+    Button:
+        text: "Salir"
+        on_press: root.salir()
